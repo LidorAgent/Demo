@@ -1,3 +1,15 @@
+// This function is called by the 'onload' attribute in your HTML script tag.
+// Its job is to render the Turnstile widget.
+function renderTurnstileWidget() {
+    turnstile.render('#turnstile-container', {
+        sitekey: 'YOUR_SITE_KEY_HERE', // <-- IMPORTANT: Make sure your Site Key is correct!
+        action: 'phishing-awareness-test',
+        // This 'callback' tells Turnstile which function to run upon success.
+        // The name MUST match the function below exactly.
+        callback: onTurnstileSuccess, 
+    });
+}
+
 // This function is called by Cloudflare Turnstile when verification is successful
 function onTurnstileSuccess(token) {
     // Find the Turnstile widget and hide it

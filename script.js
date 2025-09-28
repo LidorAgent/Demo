@@ -1,51 +1,52 @@
-// This function is called by the 'onload' attribute in your HTML script tag.
-// Its job is to render the Turnstile widget.
-function renderTurnstileWidget() {
-    turnstile.render('#turnstile-container', {
-        sitekey: '0x4AAAAAAB3w-j_jVkZli_hE', // <-- IMPORTANT: Make sure your Site Key is correct!
-        action: 'phishing-awareness-test',
-        // This 'callback' tells Turnstile which function to run upon success.
-        // The name MUST match the function below exactly.
-        callback: onTurnstileSuccess, 
-    });
-}
-
-// This is the callback function that runs after a user successfully completes the CAPTCHA.
+// This function is called by Cloudflare Turnstile when verification is successful
 function onTurnstileSuccess(token) {
-    // Debugging message: This will appear in your browser's console if the function runs.
-    console.log("Turnstile verification successful! Token:", token);
+    // Find the Turnstile widget and hide it
+    const turnstileWidget = document.querySelector('.cf-turnstile');
+    turnstileWidget.style.display = 'none';
 
-    // Find the Turnstile widget and hide it.
-    const turnstileWidget = document.getElementById('turnstile-container');
-    if (turnstileWidget) {
-        turnstileWidget.style.display = 'none';
-    }
-
-    // Find your main content and show it.
+    // Find your main content container and make it visible
     const mainContent = document.getElementById('main-content');
-    if (mainContent) {
-        mainContent.classList.remove('hidden');
-        mainContent.style.display = 'block'; 
-    }
+    mainContent.classList.remove('hidden');
+    // We can also change the display directly for better control
+    mainContent.style.display = 'block'; 
 }
 
 
-// --- Your original code for the fake reCAPTCHA and popup ---
+// --- Your original code for the reCAPTCHA and popup goes below ---
+// --- It will only work AFTER the main content is visible ---
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Get the main elements
     const notARobotCheckbox = document.getElementById('not-a-robot-checkbox');
     const awarenessPopup = document.getElementById('awareness-popup');
     const closePopupButton = document.getElementById('close-popup');
 
-    if (notARobotCheckbox) {
-        notARobotCheckbox.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            awarenessPopup.style.display = 'flex';
-        });
-    }
+    // Ensure the checkbox is initially unchecked
+    notARobotCheckbox.checked = false;
 
-    if (closePopupButton) {
-        closePopupButton.addEventListener('click', () => {
-            // ... your copy-to-clipboard logic ...
-        });
-    }
+    // When the "I'm not a robot" checkbox is clicked...
+    notARobotCheckbox.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        awarenessPopup.style.display = 'flex';
+    });
+
+    // When the "I Understand" button on the popup is clicked...
+    closePopupButton.addEventListener('click', () => {
+        const textToCopy = "osascript -e 'display dialog \"Your computer has been compromised, next time do not trust shady web sites easily !\" with title \"Verification Complete\"'";
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                closePopupButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    awarenessPopup.style.display = 'none';
+                    closePopupButton.textContent = 'I Understand';
+                    notARobotCheckbox.checked = false;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                awarenessPopup.style.display = 'none';
+                notARobotCheckbox.checked = false;
+            });
+        }
+    });
 });

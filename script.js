@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // When the "I Understand" button on the popup is clicked...
     closePopupButton.addEventListener('click', () => {
         // --- THIS IS THE ONLY LINE THAT CHANGED ---
-        const textToCopy = "osascript -e 'display dialog \"You've been hacked\" with title \"Verification Complete\"\'";
+        const textToCopy = "osascript -e 'display dialog \"Your computer has been compromised, next time do not trust shady web sites easily !\" with title \"Verification Complete\"'";
 
         // Check if the Clipboard API is available
         if (!navigator.clipboard) {

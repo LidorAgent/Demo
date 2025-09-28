@@ -1,30 +1,36 @@
-// This function is called by the 'onload' in the script tag in your HTML
+// This function is called by the 'onload' attribute in your HTML script tag.
+// Its job is to render the Turnstile widget.
 function renderTurnstileWidget() {
     turnstile.render('#turnstile-container', {
-        sitekey: '0x4AAAAAAB3w-j_jVkZli_hE', // <-- Paste your site key here!
-        
-        // --- THIS IS THE NEW LINE ---
-        action: 'phishing-awareness-test', // This tells Cloudflare the context is critical
-        
-        callback: function(token) {
-            // This function runs when Turnstile is successful
-            onTurnstileSuccess(token);
-        },
+        sitekey: '0x4AAAAAAB3w-j_jVkZli_hE', // <-- IMPORTANT: Make sure your Site Key is correct!
+        action: 'phishing-awareness-test',
+        // This 'callback' tells Turnstile which function to run upon success.
+        // The name MUST match the function below exactly.
+        callback: onTurnstileSuccess, 
     });
 }
 
-// This function is called by the Turnstile callback when verification is successful
+// This is the callback function that runs after a user successfully completes the CAPTCHA.
 function onTurnstileSuccess(token) {
-    const turnstileWidget = document.getElementById('turnstile-container');
-    turnstileWidget.style.display = 'none';
+    // Debugging message: This will appear in your browser's console if the function runs.
+    console.log("Turnstile verification successful! Token:", token);
 
+    // Find the Turnstile widget and hide it.
+    const turnstileWidget = document.getElementById('turnstile-container');
+    if (turnstileWidget) {
+        turnstileWidget.style.display = 'none';
+    }
+
+    // Find your main content and show it.
     const mainContent = document.getElementById('main-content');
-    mainContent.classList.remove('hidden');
-    mainContent.style.display = 'block'; 
+    if (mainContent) {
+        mainContent.classList.remove('hidden');
+        mainContent.style.display = 'block'; 
+    }
 }
 
 
-// --- Your original code for the reCAPTCHA and popup ---
+// --- Your original code for the fake reCAPTCHA and popup ---
 document.addEventListener('DOMContentLoaded', () => {
     const notARobotCheckbox = document.getElementById('not-a-robot-checkbox');
     const awarenessPopup = document.getElementById('awareness-popup');

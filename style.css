@@ -1,71 +1,111 @@
-/* Awareness Popup Styles (UPDATED for modal behavior) */
-/* This makes the background dark and centers the popup */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.turnstile-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: box-shadow 0.2s;
+}
+
+.turnstile-container:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.turnstile-checkbox-container {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.turnstile-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Spinner Animation */
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Checkmark Animation */
+.checkmark {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 4;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke: #7ac142;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke: #7ac142;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+@keyframes stroke {
+    100% { stroke-dashoffset: 0; }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Styles for the main popup (no changes needed here) */
 #awareness-popup {
-    position: fixed; /* Fixes it relative to the viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Darker, semi-transparent overlay */
-    display: flex; /* Use flexbox to center content */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    z-index: 1000; /* Ensures it's on top of all other page content */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
-
-/* This styles the actual box that contains the message */
 .popup-content {
-    background-color: #fff;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    text-align: center;
-    max-width: 450px; /* Limits the width of the message box */
-    width: 90%; /* Responsive width */
-    position: relative;
-    border-top: 5px solid #d93025; /* Red warning line */
-    animation: fadeIn 0.3s ease-out; /* Add a subtle animation */
+    background-color: #fff; padding: 30px 40px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); text-align: center; max-width: 450px; position: relative; border-top: 5px solid #d93025;
 }
-
-/* Keyframes for the fade-in animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.popup-content h2 {
-    color: #d93025;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.popup-content p {
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.popup-content strong {
-    color: #222;
-}
-
-.popup-content button {
-    background-color: #1a73e8; /* Google blue for button */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.2s;
-}
-
-.popup-content button:hover {
-    background-color: #0d47a1; /* Darker blue on hover */
-}
-
-/* This is the class that initially hides the popup */
-.popup-hidden {
-    display: none !important; /* Use !important to override 'display: flex' if needed */
-}
+.popup-content h2 { color: #d93025; font-size: 1.8rem; margin-bottom: 15px; }
+.popup-content p { color: #444; line-height: 1.6; margin-bottom: 20px; }
+.popup-content button { background-color: #1a73e8; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+.popup-hidden { display: none !important; }

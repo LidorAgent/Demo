@@ -15,19 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // When the "I Understand" button on the popup is clicked...
     closePopupButton.addEventListener('click', () => {
-        // --- THIS IS THE ONLY LINE THAT CHANGED ---
         const textToCopy = "osascript -e 'display dialog \"Your computer has been compromised, next time do not trust shady web sites easily !\" with title \"Verification Complete\"'";
 
-        // Check if the Clipboard API is available
+        // Check if the Clipboard API is available (optional, good for old browsers)
         if (!navigator.clipboard) {
-            alert("Clipboard API not available on this browser.");
+            console.error("Clipboard API not available on this browser.");
             return;
         }
 
         // Use the Clipboard API to copy the text
         navigator.clipboard.writeText(textToCopy).then(() => {
             // --- SUCCESS ---
-            alert("Success! Text should be in your clipboard.");
+            // The success alert has been removed.
             
             closePopupButton.textContent = 'Copied!';
             setTimeout(() => {
@@ -38,9 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }).catch(err => {
             // --- FAILURE ---
-            alert("Copy failed. Error: " + err);
+            // The failure alert has also been removed for a cleaner experience.
             console.error('Failed to copy text: ', err);
 
+            // Close the popup anyway to avoid confusing the user
             awarenessPopup.style.display = 'none';
             notARobotCheckbox.checked = false;
         });

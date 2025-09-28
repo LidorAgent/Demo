@@ -8,104 +8,151 @@ body {
     margin: 0;
 }
 
-.turnstile-container {
+.recaptcha-container {
+    background-color: #f9f9f9;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recaptcha-box {
     display: flex;
     align-items: center;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px 15px;
+    padding: 15px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.recaptcha-box input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: box-shadow 0.2s;
+    -webkit-appearance: none; /* Hide default checkbox */
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #c2c2c2;
+    border-radius: 3px;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-.turnstile-container:hover {
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+.recaptcha-box input[type="checkbox"]:hover {
+    border-color: #929292;
 }
 
-.turnstile-checkbox-container {
-    width: 30px;
-    height: 30px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
+/* Style for the checked state */
+.recaptcha-box input[type="checkbox"]:checked {
+    background-color: #1a73e8; /* Google blue */
+    border-color: #1a73e8;
+    position: relative;
+}
+
+.recaptcha-box input[type="checkbox"]:checked::before {
+    content: '✔';
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.recaptcha-box label {
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.recaptcha-footer {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-right: 12px;
+    font-size: 0.8rem;
+    color: #666;
+    width: 100%;
+    justify-content: space-between;
 }
 
-.turnstile-text {
-    font-size: 1rem;
+.recaptcha-footer img {
+    height: 20px;
+    margin-right: 5px;
+}
+
+.recaptcha-footer span {
+    margin-right: 5px;
+}
+
+.recaptcha-footer .privacy-terms {
+    margin-left: auto;
     color: #555;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-/* Spinner Animation */
-.spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    animation: spin 1s linear infinite;
+/* Awareness Popup Styles (updated to match your request) */
+.popup-hidden {
+    display: none; /* Ensure it's hidden by default */
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Checkmark Animation */
-.checkmark {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: block;
-    stroke-width: 4;
-    stroke: #fff;
-    stroke-miterlimit: 10;
-}
-
-.checkmark-circle {
-    stroke-dasharray: 166;
-    stroke-dashoffset: 166;
-    stroke: #7ac142;
-    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-}
-
-.checkmark-check {
-    transform-origin: 50% 50%;
-    stroke-dasharray: 48;
-    stroke-dashoffset: 48;
-    stroke: #7ac142;
-    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
-}
-
-@keyframes stroke {
-    100% { stroke-dashoffset: 0; }
-}
-
-.hidden {
-    display: none;
-}
-
-/* Styles for the main popup (no changes needed here) */
 #awareness-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000; /* Ensure it's on top */
 }
+
 .popup-content {
-    background-color: #fff; padding: 30px 40px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); text-align: center; max-width: 450px; position: relative; border-top: 5px solid #d93025;
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 450px;
+    position: relative;
+    border-top: 5px solid #d93025; /* Red warning line */
 }
-.popup-content h2 { color: #d93025; font-size: 1.8rem; margin-bottom: 15px; }
-.popup-content p { color: #444; line-height: 1.6; margin-bottom: 20px; }
-.popup-content button { background-color: #1a73e8; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: bold; }
-.popup-hidden { display: none !important; }
+
+.popup-content h2 {
+    color: #d93025;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.popup-content p {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.popup-content strong {
+    color: #222;
+}
+
+.popup-content button {
+    background-color: #1a73e8; /* Google blue for button */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.popup-content button:hover {
+    background-color: #0d47a1; /* Darker blue on hover */
+}

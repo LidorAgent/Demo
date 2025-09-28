@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const awarenessPopup = document.getElementById('awareness-popup');
     const closePopupButton = document.getElementById('close-popup');
 
-    // Ensure the checkbox is initially unchecked (for realism)
+    // Ensure the checkbox is initially unchecked
     notARobotCheckbox.checked = false;
 
     // When the "I'm not a robot" checkbox is clicked...
@@ -16,25 +16,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // When the "I Understand" button on the popup is clicked...
     closePopupButton.addEventListener('click', () => {
         const textToCopy = "do not click on anything you see";
-        const originalButtonText = closePopupButton.textContent;
 
-        // Use the modern Clipboard API to copy the text
+        // Check if the Clipboard API is available
+        if (!navigator.clipboard) {
+            alert("Clipboard API not available on this browser.");
+            return;
+        }
+
+        // Use the Clipboard API to copy the text
         navigator.clipboard.writeText(textToCopy).then(() => {
             // --- SUCCESS ---
-            // Give the user visual feedback that the text was copied
+            // If the browser thinks it worked, it will show this alert.
+            alert("Success! Text should be in your clipboard.");
+            
             closePopupButton.textContent = 'Copied!';
-
-            // After 2 seconds, hide the popup and reset everything
             setTimeout(() => {
                 awarenessPopup.style.display = 'none';
-                closePopupButton.textContent = originalButtonText; // Change text back
+                closePopupButton.textContent = 'I Understand';
                 notARobotCheckbox.checked = false;
-            }, 2000); // 2-second delay to show the "Copied!" message
+            }, 2000);
 
         }).catch(err => {
             // --- FAILURE ---
-            // If copying fails, log the error and just close the popup
-            console.error('Failed to copy text: ', err);
+            // If the browser blocks the action, it will show this alert with the error.
+            alert("Copy failed. Error: " + err);
+            console.error('Failed to copy text: ', err); // Also log error for developers
+
+            // Close the popup anyway
             awarenessPopup.style.display = 'none';
             notARobotCheckbox.checked = false;
         });

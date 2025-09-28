@@ -1,7 +1,7 @@
 // This function is called by the 'onload' in the script tag in your HTML
 function renderTurnstileWidget() {
     turnstile.render('#turnstile-container', {
-        sitekey: 'YOUR_SITE_KEY_HERE', // <-- Paste your site key here!
+        sitekey: '0x4AAAAAAB3w-j_jVkZli_hE', // <-- Paste your site key here!
         
         // --- THIS IS THE NEW LINE ---
         action: 'phishing-awareness-test', // This tells Cloudflare the context is critical

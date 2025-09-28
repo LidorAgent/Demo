@@ -3,34 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Verification</title>
+    <title>Security Check</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="captcha-container">
-        <div class="captcha-header">
-            <span>Select all images with</span>
-            <span class="captcha-subject">Traffic Lights</span>
+    <div class="recaptcha-container">
+        <div class="recaptcha-box">
+            <input type="checkbox" id="not-a-robot-checkbox">
+            <label for="not-a-robot-checkbox">I'm not a robot</label>
         </div>
-        <div class="image-grid">
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
-            <div class="grid-item"><img src="https://via.placeholder.com/150/cccccc/000000?text=Image" alt="captcha image"></div>
+        <div class="recaptcha-footer">
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA logo">
+            <span>reCAPTCHA</span>
+            <span class="privacy-terms">Privacy - Terms</span>
         </div>
-        <button id="verify-button" class="captcha-button">Verify</button>
     </div>
 
-    <div id="alert-popup" class="popup-hidden">
+    <div id="awareness-popup" class="popup-hidden">
         <div class="popup-content">
             <h2>This is an awareness test!</h2>
-            <p>You clicked on a suspicious link. In a real scenario, this could have been malicious.</p>
-            <p><strong>Please be more cautious next time and verify links before clicking.</strong></p>
+            <p>You clicked on something you shouldn't have. In a real scenario, this could have been malicious.</p>
+            <p><strong>Please do not click on anything suspicious next time. Always verify the source.</strong></p>
             <button id="close-popup">I Understand</button>
         </div>
     </div>

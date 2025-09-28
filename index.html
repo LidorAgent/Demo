@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Required</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="email-container">
+        <h1>Action Required: Please Verify Your Account Login</h1>
+        <p>Dear Customer,</p>
+        <p>We have detected unusual activity on your account. For your security, please verify your recent login attempt by clicking the link below. Failure to do so may result in temporary account suspension.</p>
+        
+        <a href="#" id="phishing-link">https://my-secure-portal.com/verify-login</a>
+        
+        <p>If you did not attempt to log in recently, please disregard this message.</p>
+        <p>Thank you,<br>The Security Team</p>
+    </div>
+
+    <div id="alert-popup" class="popup-hidden">
+        <div class="popup-content">
+            <h2>This is an awareness test!</h2>
+            <p>You clicked on a suspicious link. In a real scenario, this could have been malicious.</p>
+            <p><strong>Please be more cautious next time and verify links before clicking.</strong></p>
+            <button id="close-popup">I Understand</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

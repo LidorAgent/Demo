@@ -1,109 +1,71 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.recaptcha-container {
-    background-color: #f9f9f9;
-    border: 1px solid #d3d3d3;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 300px;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.recaptcha-box {
-    display: flex;
-    align-items: center;
-    padding: 15px 0;
-    width: 100%;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 15px;
-}
-
-.recaptcha-box input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
-    margin-right: 15px;
-    cursor: pointer;
-    -webkit-appearance: none; /* Hide default checkbox */
-    -moz-appearance: none;
-    appearance: none;
-    border: 2px solid #c2c2c2;
-    border-radius: 3px;
-    outline: none;
-    transition: background-color 0.2s, border-color 0.2s;
-}
-
-.recaptcha-box input[type="checkbox"]:hover {
-    border-color: #929292;
-}
-
-/* Style for the checked state */
-.recaptcha-box input[type="checkbox"]:checked {
-    background-color: #1a73e8; /* Google blue */
-    border-color: #1a73e8;
-    position: relative;
-}
-
-.recaptcha-box input[type="checkbox"]:checked::before {
-    content: '✔';
-    color: white;
-    font-size: 18px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-.recaptcha-box label {
-    font-size: 1.2rem;
-    color: #333;
-    cursor: pointer;
-}
-
-.recaptcha-footer {
-    display: flex;
-    align-items: center;
-    font-size: 0.8rem;
-    color: #666;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.recaptcha-footer img {
-    height: 20px;
-    margin-right: 5px;
-}
-
-.recaptcha-footer span {
-    margin-right: 5px;
-}
-
-.recaptcha-footer .privacy-terms {
-    margin-left: auto;
-    color: #555;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-/* Awareness Popup Styles (updated to match your request) */
-.popup-hidden {
-    display: none; /* Ensure it's hidden by default */
-}
-
+/* Awareness Popup Styles (UPDATED for modal behavior) */
+/* This makes the background dark and centers the popup */
 #awareness-popup {
-    position: fixed;
+    position: fixed; /* Fixes it relative to the viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker, semi-transparent overlay */
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Ensures it's on top of all other page content */
+}
+
+/* This styles the actual box that contains the message */
+.popup-content {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 450px; /* Limits the width of the message box */
+    width: 90%; /* Responsive width */
+    position: relative;
+    border-top: 5px solid #d93025; /* Red warning line */
+    animation: fadeIn 0.3s ease-out; /* Add a subtle animation */
+}
+
+/* Keyframes for the fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.popup-content h2 {
+    color: #d93025;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.popup-content p {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.popup-content strong {
+    color: #222;
+}
+
+.popup-content button {
+    background-color: #1a73e8; /* Google blue for button */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.popup-content button:hover {
+    background-color: #0d47a1; /* Darker blue on hover */
+}
+
+/* This is the class that initially hides the popup */
+.popup-hidden {
+    display: none !important; /* Use !important to override 'display: flex' if needed */
+}

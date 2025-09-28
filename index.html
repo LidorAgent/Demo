@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Verification</title>
+    <title>Security Check</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="turnstile-widget" class="turnstile-container">
-        <div class="turnstile-checkbox-container">
-            <div id="turnstile-spinner" class="spinner hidden"></div>
-            <svg id="turnstile-checkmark" class="checkmark hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-            </svg>
+    <div class="recaptcha-container">
+        <div class="recaptcha-box">
+            <input type="checkbox" id="not-a-robot-checkbox">
+            <label for="not-a-robot-checkbox">I'm not a robot</label>
         </div>
-        <div id="turnstile-text" class="turnstile-text">
-            Click to verify
+        <div class="recaptcha-footer">
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA logo">
+            <span>reCAPTCHA</span>
+            <span class="privacy-terms">Privacy - Terms</span>
         </div>
     </div>
 

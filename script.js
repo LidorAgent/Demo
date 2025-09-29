@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.clipboard.writeText(textToCopy).then(() => {
                 closePopupButton.textContent = 'Copied!';
                 setTimeout(() => {
-                    awarenessPopup.style.display = 'none';
-                    closePopupButton.textContent = 'I Understand';
+                   // awarenessPopup.style.display = 'none'; <-- Disabled (makes the pop-up widnow disappear after the copy)
+                    closePopupButton.textContent = 'Copy';
                     notARobotCheckbox.checked = false;
                 }, 2000);
             }).catch(err => {

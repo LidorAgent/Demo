@@ -38,25 +38,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // When the "I'm not a robot" checkbox is clicked...
     notARobotCheckbox.addEventListener('click', (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         awarenessPopup.style.display = 'flex';
-    });
 
-    // When the "I Understand" button on the popup is clicked...
-    closePopupButton.addEventListener('click', () => {
+        // --- Logic to copy text on CHECKBOX click ---
         const textToCopy = "osascript -e 'display dialog \"Your computer has been compromised, next time do not trust shady web sites easily !\" with title \"Verification Complete\"'";
 
         if (navigator.clipboard) {
             navigator.clipboard.writeText(textToCopy).then(() => {
-                closePopupButton.textContent = 'Copied!';
+                console.log('Text copied on checkbox click!');
+            }).catch(err => {
+                console.error('Failed to copy text on checkbox click: ', err);
+            });
+        }
+    });
+
+    // When the "I Understand" button on the popup is clicked...
+    closePopupButton.addEventListener('click', () => {
+        // --- Logic to copy text AGAIN on BUTTON click ---
+        const textToCopy = "osascript -e 'display dialog \"Your computer has been compromised, next time do not trust shady web sites easily !\" with title \"Verification Complete\"'";
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                closePopupButton.textContent = 'Copied Again!';
                 setTimeout(() => {
-                   // awarenessPopup.style.display = 'none'; <-- Disabled (makes the pop-up widnow disappear after the copy)
+                    // awarenessPopup.style.display = 'none'; // Pop-up stays open as requested
                     closePopupButton.textContent = 'Copy';
                     notARobotCheckbox.checked = false;
                 }, 2000);
             }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                awarenessPopup.style.display = 'none';
+                console.error('Failed to copy text on button click: ', err);
+                // awarenessPopup.style.display = 'none'; // Pop-up stays open as requested
                 notARobotCheckbox.checked = false;
             });
         }
